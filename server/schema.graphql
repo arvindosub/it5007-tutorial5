@@ -1,0 +1,35 @@
+scalar GraphQLDate
+
+enum Action {
+  Remove
+}
+
+type Guest {
+  _id: ID!
+  id: Int!
+  name: String!
+  contact: Int!
+  arrival: GraphQLDate!
+  remove: Action!
+}
+
+input GuestInputs {
+  name: String!
+  contact: Int!
+  arrival: GraphQLDate
+  remove: Action = Remove
+}
+
+##### Top level declarations
+
+type Query {
+  about: String!
+  guestList: [Guest!]!
+}
+
+type Mutation {
+  setAboutMessage(message: String!): String
+  guestAdd(guest: GuestInputs!): Guest!
+  guestRemove(id: Int!): String
+  guestUpdate(oldId: Int!, newId: Int!): String
+}
